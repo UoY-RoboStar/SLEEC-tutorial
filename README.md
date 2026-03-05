@@ -3,7 +3,7 @@ SLEEC-tutorial
 
 This repository contains a Dockerfile that incorporates LEGOS-SLEEC and SLEEC-TK in a single environment that can be used from a web browser. The image targets Intel/AMD64 but can be executed on macOS under Rosetta emulation, which is enabled by default for Docker.
 
-## Prerequisites
+## Pre-requisites
 
 * Docker (Intel/AMD64 or Apple Silicon under emulation)
 
