@@ -3,7 +3,8 @@ SLEEC-tutorial
 
 This repository contains a Dockerfile that incorporates LEGOS-SLEEC and SLEEC-TK in a single environment that can be used from a web browser. The image targets Intel/AMD64 but can be executed on macOS under Rosetta emulation, which is enabled by default for Docker.
 
-## Pre-requisites
+## Prerequisites
+
 * Docker (Intel/AMD64 or Apple Silicon under emulation)
 
 ## Usage
@@ -11,7 +12,7 @@ To execute the prebuilt docker image, open a terminal and use the command:
 ```
 docker run --platform linux/amd64 -it --name sleec-tutorial -p 8080:8080 ghcr.io/UoY-RoboStar/SLEEC-tutorial:latest
 ```
-You should then be able to open a web browser at [http://localhost:8080](http://localhost:8080) to open the XFCE4 desktop environment as reproduced in the screenshot below. The window can be resized as needed.
+You should then be able to open a web browser at [http://localhost:8080](http://localhost:8080) to interact with the Linux-based XFCE4 desktop environment as reproduced in the screenshot below. The window can be resized as needed.
 
 ![SLEEC environment](/img/sleec-environment.png)
 
