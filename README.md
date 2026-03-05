@@ -9,10 +9,11 @@ This repository contains a Dockerfile that incorporates LEGOS-SLEEC and SLEEC-TK
 ## Usage
 To execute the prebuilt docker image, open a terminal and use the command:
 ```
-docker run --platform linux/amd64 -d --name sleec-tutorial -p 8080:8080 ghcr.io/UoY-RoboStar/SLEEC-tutorial:latest
+docker run --platform linux/amd64 -it --name sleec-tutorial -p 8080:8080 ghcr.io/UoY-RoboStar/SLEEC-tutorial:latest
 ```
-You should then be able to open a web browser at [http://localhost:8080](http://localhost:8080), which
-should open an XFCE4 desktop environment, similar to that shown in the screenshot below:
+You should then be able to open a web browser at [http://localhost:8080](http://localhost:8080) to open the XFCE4 desktop environment as reproduced in the screenshot below. The window can be resized as needed.
+
+![SLEEC environment](/img/sleec-environment.png)
 
 ### Building the Docker image (optional)
 To build the Docker image in this repository from scratch use the command:

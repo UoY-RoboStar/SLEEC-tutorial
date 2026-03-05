@@ -98,8 +98,8 @@ websockify --web=/usr/share/novnc/ 8080 localhost:5900 &
 exec startxfce4
 EOF
 
-# Make the default VNC by using symlink
-RUN ln -s /usr/share/novnc/vnc.html /usr/share/novnc/index.html
+# Create an index.html that auto-redirects to VNC with remote resizing and auto-connect enabled
+RUN echo '<meta http-equiv="refresh" content="0; url=vnc.html?autoconnect=true&resize=remote">' > /usr/share/novnc/index.html
 
 # Make start-workspace executable
 RUN chmod +x /usr/local/bin/start-workspace.sh
