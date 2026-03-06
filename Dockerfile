@@ -149,7 +149,7 @@ Version=1.0\n\
 Type=Application\n\
 Name=SLEEC-TK\n\
 Comment=SLEEC ToolKit\n\
-Exec=/opt/sleec-tk/eclipse\n\
+Exec=/opt/sleec-tk/eclipse -data /home/sleec/eclipse-workspace\n\
 Icon=/opt/sleec-tk/icon.xpm\n\
 Path=/opt/sleec-tk\n\
 Terminal=false\n\
@@ -165,6 +165,12 @@ Terminal=false\n\
 Categories=Development;Science;IDE;" > /home/sleec/Desktop/fdr.desktop && \
     chmod +x /home/sleec/Desktop/*.desktop && \
     chown -R sleec:sleec /home/sleec/Desktop /opt/sleec-tk
+
+# Copy sample SLEEC-TK project
+RUN mkdir -p /home/sleec/git/SLEEC-TK && mkdir -p /home/sleec/eclipse-workspace && git clone -b tutorial https://github.com/UoY-RoboStar/SLEEC-TK /home/sleec/git/SLEEC-TK
+
+# Add SLEEC-TK Eclipse .metadata to workspace
+ADD --chown=sleec:sleec ./sleec-tk/metadata.tar.gz /home/sleec/eclipse-workspace/
 
 # Expose the web port
 EXPOSE 8080
