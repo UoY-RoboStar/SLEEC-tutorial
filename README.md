@@ -2,7 +2,7 @@
 
 This repository contains a Dockerfile that incorporates LEGOS-SLEEC and SLEEC-TK in a single environment that can be used from a web browser. The image targets Intel/AMD64 but can be executed on macOS under Rosetta emulation, which is enabled by default for Docker.
 
-## Prerequisites
+## Pre-requisites
 
 * Docker (Intel/AMD64 or Apple Silicon under emulation)
 
@@ -29,3 +29,4 @@ To setup FDR4, click on the shortcut in the desktop named `FDR4 (Launch or Insta
 
 #### Running SLEEC-TK
 To run SLEEC-TK, double-click on the `SLEEC-TK` shortcut on the desktop. The Eclipse launcher will appear, followed by a dialog asking for selecting a workspace path. You can accept the default `/home/sleec/eclipse-workspace` by clicking on `Launch`.
+To setup FDR4, click on the shortcut in the desktop named `FDR4 (Launch or Install)`. A terminal will be opened, and if FDR is not yet installed it will be automatically installed. At the end, press Enter to launch FDR and proceed to obtain a license following the instructions on the screen. You can then close FDR after it opens.
