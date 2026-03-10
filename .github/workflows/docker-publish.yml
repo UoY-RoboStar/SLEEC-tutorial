@@ -112,28 +112,37 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # NEW: Create a staging folder and compress the repository source code
-      - name: Prepare Source Code Archive
+      - name: Prepare Final Archive and Checksum
         run: |
-          # Create a dedicated directory to hold everything going to Zenodo
-          mkdir -p zenodo-artifacts
-          
-          # Compress the repository code into that directory. 
-          # We exclude the hidden .git folder and the artifacts folder itself to keep it clean.
-          echo "Compressing source code..."
-          tar -czf zenodo-artifacts/source-code.tar.gz --exclude=.git --exclude=zenodo-artifacts .
-
-      - name: Pull and Export Docker Image
-        run: |
+          # 1. Pull and save the Docker image
           IMAGE_ID=$(echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}" | tr '[:upper:]' '[:lower:]')
           VERSION=${{ github.ref_name }}
-          
-          echo "Pulling $IMAGE_ID:$VERSION..."
           docker pull $IMAGE_ID:$VERSION
+          docker save $IMAGE_ID:$VERSION | gzip > docker-image.tar.gz
+
+          # 2. Compress the entire repository into a master .zip file.
+          echo "Creating master zip archive..."
+          zip -r sleec-tutorial.zip . -x "*.git*" -x "zenodo-upload/*"
+
+          # 3. Generate the SHA256 checksum of the new .zip file
+          echo "Generating checksum..."
+          sha256sum sleec-tutorial.zip > sleec-tutorial.zip.sha256
           
-          # NEW: Save the image directly into our staging folder
-          echo "Saving image to zenodo-artifacts/my-docker-image.tar.gz..."
-          docker save $IMAGE_ID:$VERSION | gzip > zenodo-artifacts/my-docker-image.tar.gz
+          # Print the checksum to the standard console log
+          echo "The SHA256 checksum is:"
+          cat sleec-tutorial.zip.sha256
+          
+          # Print the checksum to the GitHub Actions Job Summary page
+          echo "### 🔐 Release Checksum" >> $GITHUB_STEP_SUMMARY
+          echo "The SHA256 checksum for \`sleec-tutorial.zip\` is:" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`text" >> $GITHUB_STEP_SUMMARY
+          cat sleec-tutorial.zip.sha256 >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          
+          # 4. Move the final zip and checksum into a clean folder for Zenodo
+          mkdir -p zenodo-upload
+          mv sleec-tutorial.zip zenodo-upload/
+          mv sleec-tutorial.zip.sha256 zenodo-upload/
 
       - name: Deploy to Zenodo
         uses: rseng/zenodo-release@main
