@@ -93,3 +93,32 @@ Proof that `Trace 5` is indeed a genuine counter-example of the negated version 
 * `assert RuleB_wrt_RuleC :[has trace [T]]: <trace ...>` : similarly `trace` is `Trace 5`, and this assertion checks that `trace` is a valid trace of `RuleB_wrt_RuleC`, that is, it is possible.
 
 Checking that both assertions pass indicates that `trace` is a valid counter-example, that is, the refinement `RuleC_wrt_RuleB [T= RuleB_wrt_RuleC` does not hold, as `trace` is a valid observation of `RuleB_wrt_RuleC` but not `RuleC_wrt_RuleB` as expected.
+
+#### Reproducing results of conformance verification of design models
+The design models reproduced in Section 4 of the paper can be opened from the provided `RAD0` Eclipse project. We observe that, upon loading the project, you will be asked whether to open these diagrams. To manually open `MonitoringService` (Figure 4 in the paper), one of the included RoboChart diagrams, select the file `system.rct` under the `Model Explorer` view, and expand the tree structure: `RC Package RAD`, followed by double clicking on `MonitoringService`. The diagram will then appear to the right as reproduced below.
+
+![Screenshot of MonitoringService open](img/MonitoringService.png)
+
+The RoboChart models of Figures 5 and 6 in the paper are similarly available under `RC Package RAD`. 
+
+##### Verification
+Similarly to the pair-wise validation of SLEEC rules, conformance verification also requires that FDR4 has been installed and activated. The assertions are included in the file `rad.assertions` that can be edited by double-clicking, as reproduced below.
+
+![Screenshot of rad.assertions open in SLEEC-TK](img/RADAssertions.png)
+
+###### Checking using SLEEC-TK's integration with FDR
+
+Before verifying the assertions, configure FDR4 for use with SLEEC-TK by selecting `Window` from the menu bar, and then choosing `Preferences`. In the dialog that appears, using the tree show on the left select `RoboChart` > `Analysis`, then type the path `/opt/fdr`. Eclipse may ask you for `Preference Synchronization`, choose `No - Preferences will be saved locally.`, followed by `Ok` twice.
+
+With the file `rad.assertions` open in SLEEC-TK, locate the red icons next to the label `CSP` below the Eclipse menu bar. Click on the second icon to the right of the label `CSP` in red:
+
+![Running assertions check](img/CSPLabel.png)
+
+If successful, you should see a status bar at the bottom of SLEEC-TK:
+
+![Running assertions check with FDR in the background](img/FDR-progress.png)
+
+At this point, FDR is running in the background to check that assertions `A1` to `A4`, specified in the file `rad.assertions` are satisfied. This process may take a while. At the end, an HTML is produced.
+
+###### Checking using FDR directly
+To check conformance assertions directly with FDR, instead, select the file under the folder `csp-gen/rad_assertions.csp` and load it into FDR. Assertions `A1` to `A2` are listed in order and can be checked from within FDR. `A1` and `A2` should pass while `A3` fails. `Trace 6`, in particular, can be obtained by examining the last assertion with `csp-gen/rad_assertions.csp` loaded into fDR.
