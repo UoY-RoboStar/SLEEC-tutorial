@@ -144,10 +144,12 @@ jobs:
           mv sleec-tutorial.zip zenodo-upload/
           mv sleec-tutorial.zip.sha256 zenodo-upload/
 
+          ls zenodo-upload/
+
       - name: Deploy to Zenodo
         uses: rseng/zenodo-release@main
         with:
-          archive: "zenodo-upload/*"
+          archive: "zenodo-upload/sleec-tutorial.zip"
           token: ${{ secrets.ZENODO_TOKEN }}
           version: ${{ github.event.release.tag_name }}
           zenodo_json: .zenodo.json
