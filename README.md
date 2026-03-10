@@ -56,7 +56,7 @@ Here, the pane on the right lists assertions related to the SLEEC Rules. We expl
 
 To reproduce `Trace 1 for Rule1` load `tutorial-assertions.csp` into FDR. Then, first type `external chase` in FDR's interactive prompt to the left followed by the Enter key. Then, type `:probe chase(SLEECRule1)` to bring up FDR's probing interface of the `tock-CSP` semantics for Rule1. This is shown as a tree, which can be used to follow a sequence of interactions, as reproduced below.
 
-![Trace1 for Rule1 using :probe chas(SLEECRule1)]()
+![Trace1 for Rule1 using :probe chas(SLEECRule1)](/img/SLEECRule1.png)
 
 In this case, the trace to be reproduced is `CurtainOpenRqt, userUnderDressed.false, userDistressed.medium, tock, CurtainsOpened`, as shown at the bottom of the screenshot. Arrow keys or the mouse cursor can be used to step through the possible interactions.
 
