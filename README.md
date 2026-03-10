@@ -106,6 +106,8 @@ Similarly to the pair-wise validation of SLEEC rules, conformance verification a
 
 ![Screenshot of rad.assertions open in SLEEC-TK](img/RADAssertions.png)
 
+Below, we provide two approaches for checking conformance assertions. The first leverages RoboTool's integration with FDR and produces an table in HTML format (Figure 7 of the paper), whereas the second allows exploring results in more detail, namely by inspecting any counter-examples.
+
 ###### Checking using SLEEC-TK's integration with FDR
 
 Before verifying the assertions, configure FDR4 for use with SLEEC-TK by selecting `Window` from the menu bar, and then choosing `Preferences`. In the dialog that appears, using the tree show on the left select `RoboChart` > `Analysis`, then type the path `/opt/fdr`. Eclipse may ask you for `Preference Synchronization`, choose `No - Preferences will be saved locally.`, followed by `Ok` twice.
@@ -118,7 +120,7 @@ If successful, you should see a status bar at the bottom of SLEEC-TK:
 
 ![Running assertions check with FDR in the background](img/FDR-progress.png)
 
-At this point, FDR is running in the background to check that assertions `A1` to `A4`, specified in the file `rad.assertions` are satisfied. **This process may take a significant amount of time to complete.** At the end, an HTML is produced.
+At this point, FDR is running in the background to check that assertions `A1` to `A4`, specified in the file `rad.assertions` are satisfied. **This process may take a significant amount of time to complete.** At the end, an HTML report is produced.
 
 ###### Checking using FDR directly
 To check conformance assertions directly with FDR, instead, select the file under the folder `csp-gen/rad_assertions.csp` and load it into FDR. Assertions `A1` to `A2` are listed in order and can be checked from within FDR. `A1` and `A2` should pass while `A3` fails. `Trace 6`, in particular, can be obtained by examining the last assertion with `csp-gen/rad_assertions.csp` loaded into FDR.
