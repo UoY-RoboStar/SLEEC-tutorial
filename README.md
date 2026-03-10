@@ -28,7 +28,7 @@ To use SLEEC-TK for analysis, you should, first of all, setup the CSP model-chec
 To setup FDR4, click on the shortcut in the desktop named `FDR4 (Launch or Install)`. A terminal will open, and if FDR is not yet installed it will be automatically installed. At the end, press Enter to launch FDR and proceed to obtain a license following the instructions on the screen. You can then close the FDR window that appears afterwards.
 
 #### Running SLEEC-TK
-To run SLEEC-TK, double-click on the `SLEEC-TK` shortcut on the desktop. The Eclipse launcher will appear, followed by a dialog asking for selecting a workspace path. You can accept the default `/home/sleec/eclipse-workspace` by clicking on `Launch`.
+To run SLEEC-TK, double-click on the `SLEEC-TK` shortcut on the desktop. The Eclipse launcher will appear, followed by a dialog asking for selecting a workspace path. If asked, you can accept the default `/home/sleec/eclipse-workspace` by clicking on `Launch`.
 
 #### Reproducing results of pair-wise consistency validation
 In SLEEC-TK, a file with extension `file.sleec` leads to the automatic generation of four files under the folder `src-gen` that are used as part of model-checking with FDR4:
