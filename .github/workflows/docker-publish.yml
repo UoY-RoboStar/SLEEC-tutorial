@@ -10,6 +10,8 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  release:
+    types: [ published ]
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -17,10 +19,8 @@ env:
   # github.repository as <account>/<repo>
   IMAGE_NAME: ${{ github.repository }}
 
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -92,3 +92,56 @@ jobs:
         # This step uses the identity token to provision an ephemeral certificate
         # against the sigstore community Fulcio instance.
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+
+  deploy:
+    needs: build 
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    
+    # Required permissions to read from the container registry
+    permissions:
+      contents: read
+      packages: read 
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log into registry ${{ env.REGISTRY }}
+        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # NEW: Create a staging folder and compress the repository source code
+      - name: Prepare Source Code Archive
+        run: |
+          # Create a dedicated directory to hold everything going to Zenodo
+          mkdir -p zenodo-artifacts
+          
+          # Compress the repository code into that directory. 
+          # We exclude the hidden .git folder and the artifacts folder itself to keep it clean.
+          echo "Compressing source code..."
+          tar -czf zenodo-artifacts/source-code.tar.gz --exclude=.git --exclude=zenodo-artifacts .
+
+      - name: Pull and Export Docker Image
+        run: |
+          IMAGE_ID=$(echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}" | tr '[:upper:]' '[:lower:]')
+          VERSION=${{ github.ref_name }}
+          
+          echo "Pulling $IMAGE_ID:$VERSION..."
+          docker pull $IMAGE_ID:$VERSION
+          
+          # NEW: Save the image directly into our staging folder
+          echo "Saving image to zenodo-artifacts/my-docker-image.tar.gz..."
+          docker save $IMAGE_ID:$VERSION | gzip > zenodo-artifacts/my-docker-image.tar.gz
+
+      - name: Deploy to Zenodo
+        uses: rseng/zenodo-release@main
+        with:
+          archive: "zenodo-artifacts/*.tar.gz"
+          token: ${{ secrets.ZENODO_TOKEN }}
+          version: ${{ github.event.release.tag_name }}
+          zenodo_json: .zenodo.json
+          html_url: ${{ github.event.release.html_url }}
