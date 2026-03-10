@@ -1,6 +1,6 @@
 # SLEEC-tutorial
 
-This repository contains a Dockerfile that incorporates LEGOS-SLEEC and SLEEC-TK in a single environment that can be used from a web browser. The image targets Intel/AMD64 but can be executed on macOS under Rosetta emulation, which is enabled by default for Docker.
+This repository contains a Dockerfile that incorporates [LEGOS-SLEEC](https://github.com/Kevin-Kolyakov/sleec-intellij-plugin) and [SLEEC-TK](https://github.com/UoY-RoboStar/SLEEC-TK/) in a single environment that can be used from a web browser. The image targets the Intel/AMD64 architecture but can be executed on macOS under Rosetta emulation, which should be enabled by default for [Docker](https://docs.docker.com/desktop/setup/install/mac-install/).
 
 ## Pre-requisites
 
@@ -75,7 +75,7 @@ For analysis of conflicts discussed in Section 3.1 of the paper, we consider the
 `SLEECRuleARuleB :[deadlock free]` and `SLEECRuleARuleBCF :[divergence free]`. Clicking on `Check`
 reveals that the first assertion does not pass, indicating that there is a conflict. The counter-example is produced by clicking on `Debug`:
 
-![Trace 2 showing conflict between RuleA and RuleB](/img/SLEECRuleARuleC.png)
+![Trace 2 showing conflict between RuleA and RuleB](/img/SLEECRuleARuleB.png)
 
 This should reveal the counter-example as reproduced above `CurtainOpenRqt, userUnderDressed.true, userUnderDressed.true,userDistressed.high, tock, tock, tock, tock, tock, tock`.
 
