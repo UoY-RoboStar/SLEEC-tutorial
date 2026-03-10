@@ -154,3 +154,5 @@ jobs:
           version: ${{ github.event.release.tag_name }}
           zenodo_json: .zenodo.json
           html_url: ${{ github.event.release.html_url }}
+          # Use Concept DOI for future releases
+          doi: 10.5281/zenodo.18945970
