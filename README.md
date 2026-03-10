@@ -118,7 +118,7 @@ If successful, you should see a status bar at the bottom of SLEEC-TK:
 
 ![Running assertions check with FDR in the background](img/FDR-progress.png)
 
-At this point, FDR is running in the background to check that assertions `A1` to `A4`, specified in the file `rad.assertions` are satisfied. This process may take a while. At the end, an HTML is produced.
+At this point, FDR is running in the background to check that assertions `A1` to `A4`, specified in the file `rad.assertions` are satisfied. **This process may take a significant amount of time to complete.** At the end, an HTML is produced.
 
 ###### Checking using FDR directly
-To check conformance assertions directly with FDR, instead, select the file under the folder `csp-gen/rad_assertions.csp` and load it into FDR. Assertions `A1` to `A2` are listed in order and can be checked from within FDR. `A1` and `A2` should pass while `A3` fails. `Trace 6`, in particular, can be obtained by examining the last assertion with `csp-gen/rad_assertions.csp` loaded into fDR.
+To check conformance assertions directly with FDR, instead, select the file under the folder `csp-gen/rad_assertions.csp` and load it into FDR. Assertions `A1` to `A2` are listed in order and can be checked from within FDR. `A1` and `A2` should pass while `A3` fails. `Trace 6`, in particular, can be obtained by examining the last assertion with `csp-gen/rad_assertions.csp` loaded into FDR.
