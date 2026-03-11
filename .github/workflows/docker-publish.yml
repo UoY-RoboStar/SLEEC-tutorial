@@ -118,7 +118,8 @@ jobs:
           IMAGE_ID=$(echo "${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}" | tr '[:upper:]' '[:lower:]')
           VERSION=${{ github.ref_name }}
           docker pull $IMAGE_ID:$VERSION
-          docker save $IMAGE_ID:$VERSION | pigz > docker-image.tar.gz
+          docker tag $IMAGE_ID:$VERSION sleec:latest
+          docker save sleec:latest | pigz > docker-image.tar.gz
 
           # 2. Compress the entire repository into a master .zip file.
           echo "Creating master zip archive..."

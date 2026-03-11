@@ -11,6 +11,11 @@ To execute the prebuilt docker image, open a terminal and use the command:
 ```
 docker run --platform linux/amd64 -it --name sleec-tutorial -p 8080:8080 ghcr.io/uoy-robostar/sleec-tutorial:main
 ```
+If using the [Zenodo artifact](https://doi.org/10.5281/zenodo.18945970), locate the file `docker-image.tar.gz`, open a terminal and instead run the following commands:
+```
+docker load -i docker-image.tar.gz
+docker run --platform linux/amd64 -it --rm -p 8080:8080 sleec-tutorial:latest
+```
 After a short while, you should then be able to open a web browser at [http://localhost:8080](http://localhost:8080) to interact with the Linux-based XFCE4 desktop environment as reproduced in the screenshot below. The window can be resized as needed.
 
 ![SLEEC environment](/img/sleec-environment.png)
