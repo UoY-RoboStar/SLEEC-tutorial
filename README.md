@@ -124,3 +124,131 @@ At this point, FDR is running in the background to check that assertions `A1` to
 
 ###### Checking using FDR directly
 To check conformance assertions directly with FDR, instead, select the file under the folder `csp-gen/rad_assertions.csp` and load it into FDR. Assertions `A1` to `A2` are listed in order and can be checked from within FDR. `A1` and `A2` should pass while `A3` fails. `Trace 6`, in particular, can be obtained by examining the last assertion with `csp-gen/rad_assertions.csp` loaded into FDR.
+
+### LEGOS-SLEEC
+To use LEGOS-SLEEC for set-wise well-formedness analysis, you should, use the docker, or follow this guide which explains how to install LEGOS-SLEEC and the Sleec plugin in your IntelliJ IDEA environment. 
+
+#### Installation Instructions
+
+#### Method 1: Install from Github Repository
+
+###### Step 1: Download IntelliJ and Python
+1. Download and install IntelliJ IDEA 2021.3.3. You can get the Community Edition for free when you scroll down [here](https://www.jetbrains.com/idea/download/other.html).
+2. Download and install Python from the official website [here](https://www.python.org/downloads/).
+3. Make sure to have git installed [here](https://git-scm.com/downloads).
+
+###### Step 2: Clone the Repository
+1. Launch IntelliJ IDEA.
+2. Click on **Get from VCS**.
+3. Enter the following URL to clone the repository:
+   ```
+   https://github.com/Kevin-Kolyakov/sleec-intellij-plugin.git
+   ```
+4. Wait for the files to be configured.
+
+###### Step 3: Configure and Run the Plugin
+1. In the **Current File** dropdown menu, change the run configuration to **Run Plugin**.
+2. Run the program. Note: Initial errors may occur; these are normal and only happen the first time.
+
+###### Step 4: Install Prerequisites
+Ensure you have the following prerequisites installed before running the Sleec IntelliJ Plugin:
+1. Python 3.5 or later.
+   ```
+   pip install z3-solver
+   ```
+   ```
+   pip install pysmt
+   ```
+   ```
+   pip install ordered-set
+   ```
+   ```
+   pip install textx
+   ```
+   ```
+   pip install termcolor
+   ```
+
+###### Step 5: Access the Sleec Template
+1. In the File tab, click on New, then Project, then select the **Sleec Templates** and click next to access all the example files in the Evaluation folder.
+2. To add new files, add them to the Evaluation folder and then save them.
+3. To run the Sleec files in the template, click on any of the icons in the top right corner of the screen and select a SLEEC file.
+
+###### Step 6: Update the Project
+1. Open IntelliJ IDEA and navigate to the **Terminal** tab at the bottom of the screen.
+2. Ensure you are in the project's root directory. If not, navigate to it using:
+   ```
+   cd path/to/your/sleec-intellij-plugin
+   ```
+3. Pull the latest updates from the repository by running:
+   ```
+   git pull origin master
+   ```
+4. Wait for the project to update and reconfigure if necessary.
+
+---
+
+##### Method 2: Install from JetBrains Marketplace
+1. Download and install IntelliJ IDEA 2021.3.3. You can get the Community Edition for free when you scroll down [here](https://www.jetbrains.com/idea/download/other.html).
+2. Download and install Python from the official website [here](https://www.python.org/downloads/).
+3. Install the following Python packages:
+   ```
+   pip install z3-solver
+   ```
+   ```
+   pip install pysmt
+   ```
+   ```
+   pip install ordered-set
+   ```
+   ```
+   pip install textx
+   ```
+   ```
+   pip install termcolor
+   ```
+5. Open **IntelliJ IDEA**.
+6. Navigate to **File > Settings > Plugins** (or **Preferences > Plugins** on macOS).
+7. In the **Plugins** settings, click on the **Marketplace** tab.
+8. Search for `Sleec` in the search bar.
+9. Locate the Sleec plugin in the results and click **Install**.
+10. Restart IntelliJ IDEA when prompted.
+11. In the File tab, click on New, then Project, then select the **Sleec Templates** and click next to access all the example files in the Evaluation folder.
+12. To run the Sleec files in the template, click on any of the icons in the top right corner of the screen and select a SLEEC file.
+
+Your Sleec plugin is now ready to use!
+
+---
+
+##### Method 3: Install from a Virtual Image (OVA File)
+
+1. Download the Sleec `.ova` file from the official repository or distribution source. [Download the `.ova` file here](https://drive.google.com/file/d/1ATkwtveFr1q4Fy9RJ0iEpHA_iUGXE-7F/view?usp=sharing)
+2. Install a virtual machine software such as **VirtualBox**:
+   - [Download VirtualBox](https://www.virtualbox.org/)
+3. Open your virtual machine software and select the option to **Import Appliance** or **Import Virtual Machine**.
+4. Browse to the downloaded `.ova` file and follow the prompts to import it.
+5. Once the virtual machine is imported, adjust the hardware settings (e.g., RAM, CPU) as needed to match your system.
+6. Start the virtual machine.
+7. The virtual machine will load an environment with IntelliJ IDEA pre-configured with the Sleec plugin.
+8. To launch IntelliJ IDEA in the Ubuntu environment, open the terminal and run:
+   ```bash
+   intellij-idea-community
+   ```
+9. If prompted for a password in the virtual machine, use:
+   ```
+   changeme
+   ```
+
+Your Sleec plugin is now ready to use within the virtual machine!
+
+---
+
+#### Verifying Installation
+
+To ensure the Sleec plugin is installed correctly:
+1. Open IntelliJ IDEA.
+2. Create or open a project.
+3. Navigate to **File > Settings > Plugins** (or **Preferences > Plugins** on macOS) and confirm that `Sleec` appears in the **Installed** tab.
+
+If the plugin is installed successfully, you should see Sleec-specific features (e.g., syntax highlighting, code completion, or tool windows) in your IDE when opening a .sleec file.
+
