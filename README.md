@@ -99,6 +99,8 @@ Proof that `Trace 5` is indeed a genuine counter-example of the negated version 
 
 Checking that both assertions pass indicates that `trace` is a valid counter-example, that is, the refinement `RuleC_wrt_RuleB [T= RuleB_wrt_RuleC` does not hold, as `trace` is a valid observation of `RuleB_wrt_RuleC` but not `RuleC_wrt_RuleB` as expected.
 
+**Note** If the file `tutorial-assertion-trace5.csp` is mistakenly overwritten in the `src-gen` folder, you can get it from [here](https://github.com/UoY-RoboStar/SLEEC-TK/raw/refs/heads/main/sleec-core/Examples/RAD-AssistiveDressingRobot/robochart/src-gen/tutorial-assertion-trace5.cs) and copy it into the `src-gen` folder of the project.
+
 #### Reproducing results of conformance verification of design models
 The design models reproduced in Section 4 of the paper can be opened from the provided `RAD0` Eclipse project. We observe that, upon loading the project, you will be asked whether to open these diagrams. To manually open `MonitoringService` (Figure 4 in the paper), one of the included RoboChart diagrams, select the file `system.rct` under the `Model Explorer` view, and expand the tree structure: `RC Package RAD`, followed by double clicking on `MonitoringService`. The diagram will then appear to the right as reproduced below.
 
