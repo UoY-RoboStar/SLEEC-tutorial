@@ -250,7 +250,7 @@ To reproduce the results shown in the tutorial paper, follow the steps below.
 
 ---
 
-### Step 1 — Load the Case Study
+### Step 1: Load the Case Study
 
 1. Open **IntelliJ IDEA** with the **SLEEC plugin** installed.
 2. Create a new SLEEC project using: File → New → Project → SLEEC Templates
@@ -261,7 +261,7 @@ This file contains the SLEEC rules used in the tutorial experiments.
 
 ---
 
-### Step 2 — Run Well-Formedness Analyses
+### Step 2: Run Well-Formedness Analyses
 
 LEGOS-SLEEC provides several analysis buttons in the IntelliJ toolbar. Each button corresponds to a specific class of well-formedness checks.
 
