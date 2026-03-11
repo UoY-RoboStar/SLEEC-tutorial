@@ -167,7 +167,7 @@ Categories=Development;Science;IDE;" > /home/sleec/Desktop/fdr.desktop && \
     chown -R sleec:sleec /home/sleec/Desktop /opt/sleec-tk
 
 # Copy sample SLEEC-TK project
-RUN mkdir -p /home/sleec/git/SLEEC-TK2 && mkdir -p /home/sleec/eclipse-workspace && git clone -b tutorial https://github.com/UoY-RoboStar/SLEEC-TK /home/sleec/git/SLEEC-TK
+RUN mkdir -p /home/sleec/git/SLEEC-TK && mkdir -p /home/sleec/eclipse-workspace && git clone -b tutorial https://github.com/UoY-RoboStar/SLEEC-TK /home/sleec/git/SLEEC-TK
 
 # Add SLEEC-TK Eclipse .metadata to workspace
 ADD --chown=sleec:sleec ./sleec-tk/metadata.tar.gz /home/sleec/eclipse-workspace/
