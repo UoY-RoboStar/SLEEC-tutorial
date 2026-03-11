@@ -1,0 +1,49 @@
+def_start
+	// Events
+	event HumanOnFloor
+	event CallEmergencyServices
+	event SmokeDetectorAlarm
+	event OpenCurtain
+	event OpenCurtainRequest
+	event DressingStarted
+	event DressingComplete
+	event NotifyCaregiver
+	
+	// Measures
+	measure humanAssents: boolean
+	measure underDressed: boolean
+	measure roomTemperature: numeric
+	measure userDisablesAlarm: boolean
+	measure alarmRestarts: boolean
+	measure userUnconscious: boolean
+def_end
+
+rule_start
+ R1 when HumanOnFloor and (not {humanAssents}) then
+    not CallEmergencyServices within 600 seconds
+    
+ R2 when OpenCurtainRequest and (not {underDressed}) then OpenCurtain within 30 seconds
+             
+ R3 when SmokeDetectorAlarm then CallEmergencyServices within 300 seconds 
+             
+ R4 when DressingStarted and (({roomTemperature} < 20)
+    and {underDressed}) then DressingComplete within 1 minutes
+
+ R5 when SmokeDetectorAlarm then CallEmergencyServices within 7 minutes
+
+ R6 when SmokeDetectorAlarm then NotifyCaregiver within 2 minutes
+ 
+ R7 when NotifyCaregiver then CallEmergencyServices within 5 minutes
+ 
+ R8 when SmokeDetectorAlarm then not CallEmergencyServices within 10 minutes
+ 
+rule_end
+
+
+concern_start
+ C1 when SmokeDetectorAlarm and ((not {userDisablesAlarm}) or {alarmRestarts}) then not CallEmergencyServices within 1 minutes
+concern_end
+
+purpose_start
+ P1 when HumanOnFloor and ({userUnconscious} and (not {humanAssents})) then CallEmergencyServices within 5 minutes
+purpose_end

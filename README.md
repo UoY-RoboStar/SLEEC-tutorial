@@ -129,3 +129,197 @@ At this point, FDR is running in the background to check that assertions `A1` to
 
 ###### Checking using FDR directly
 To check conformance assertions directly with FDR, instead, select the file under the folder `csp-gen/rad_assertions.csp` and load it into FDR. Assertions `A1` to `A2` are listed in order and can be checked from within FDR. `A1` and `A2` should pass while `A3` fails. `Trace 6`, in particular, can be obtained by examining the last assertion with `csp-gen/rad_assertions.csp` loaded into FDR.
+
+### LEGOS-SLEEC
+To use LEGOS-SLEEC for set-wise well-formedness analysis, you should, use the docker, or follow this guide which explains how to install LEGOS-SLEEC and the Sleec plugin in your IntelliJ IDEA environment. 
+
+#### Installation Instructions
+
+#### Method 1: Install from Github Repository
+
+###### Step 1: Download IntelliJ and Python
+1. Download and install IntelliJ IDEA 2021.3.3. You can get the Community Edition for free when you scroll down [here](https://www.jetbrains.com/idea/download/other.html).
+2. Download and install Python from the official website [here](https://www.python.org/downloads/).
+3. Make sure to have git installed [here](https://git-scm.com/downloads).
+
+###### Step 2: Clone the Repository
+1. Launch IntelliJ IDEA.
+2. Click on **Get from VCS**.
+3. Enter the following URL to clone the repository:
+   ```
+   https://github.com/Kevin-Kolyakov/sleec-intellij-plugin.git
+   ```
+4. Wait for the files to be configured.
+
+###### Step 3: Configure and Run the Plugin
+1. In the **Current File** dropdown menu, change the run configuration to **Run Plugin**.
+2. Run the program. Note: Initial errors may occur; these are normal and only happen the first time.
+
+###### Step 4: Install Prerequisites
+Ensure you have the following prerequisites installed before running the Sleec IntelliJ Plugin:
+1. Python 3.5 or later.
+   ```
+   pip install z3-solver
+   ```
+   ```
+   pip install pysmt
+   ```
+   ```
+   pip install ordered-set
+   ```
+   ```
+   pip install textx
+   ```
+   ```
+   pip install termcolor
+   ```
+
+###### Step 5: Access the Sleec Template
+1. In the File tab, click on New, then Project, then select the **Sleec Templates** and click next to access all the example files in the Evaluation folder.
+2. To add new files, add them to the Evaluation folder and then save them.
+3. To run the Sleec files in the template, click on any of the icons in the top right corner of the screen and select a SLEEC file.
+
+###### Step 6: Update the Project
+1. Open IntelliJ IDEA and navigate to the **Terminal** tab at the bottom of the screen.
+2. Ensure you are in the project's root directory. If not, navigate to it using:
+   ```
+   cd path/to/your/sleec-intellij-plugin
+   ```
+3. Pull the latest updates from the repository by running:
+   ```
+   git pull origin master
+   ```
+4. Wait for the project to update and reconfigure if necessary.
+
+---
+
+##### Method 2: Install from JetBrains Marketplace
+1. Download and install IntelliJ IDEA 2021.3.3. You can get the Community Edition for free when you scroll down [here](https://www.jetbrains.com/idea/download/other.html).
+2. Download and install Python from the official website [here](https://www.python.org/downloads/).
+3. Install the following Python packages:
+   ```
+   pip install z3-solver
+   ```
+   ```
+   pip install pysmt
+   ```
+   ```
+   pip install ordered-set
+   ```
+   ```
+   pip install textx
+   ```
+   ```
+   pip install termcolor
+   ```
+5. Open **IntelliJ IDEA**.
+6. Navigate to **File > Settings > Plugins** (or **Preferences > Plugins** on macOS).
+7. In the **Plugins** settings, click on the **Marketplace** tab.
+8. Search for `Sleec` in the search bar.
+9. Locate the Sleec plugin in the results and click **Install**.
+10. Restart IntelliJ IDEA when prompted.
+11. In the File tab, click on New, then Project, then select the **Sleec Templates** and click next to access all the example files in the Evaluation folder.
+12. To run the Sleec files in the template, click on any of the icons in the top right corner of the screen and select a SLEEC file.
+
+Your Sleec plugin is now ready to use!
+
+---
+
+##### Method 3: Install from a Virtual Image (OVA File)
+
+1. Download the Sleec `.ova` file from the official repository or distribution source. [Download the `.ova` file here](https://drive.google.com/file/d/1ATkwtveFr1q4Fy9RJ0iEpHA_iUGXE-7F/view?usp=sharing)
+2. Install a virtual machine software such as **VirtualBox**:
+   - [Download VirtualBox](https://www.virtualbox.org/)
+3. Open your virtual machine software and select the option to **Import Appliance** or **Import Virtual Machine**.
+4. Browse to the downloaded `.ova` file and follow the prompts to import it.
+5. Once the virtual machine is imported, adjust the hardware settings (e.g., RAM, CPU) as needed to match your system.
+6. Start the virtual machine.
+7. The virtual machine will load an environment with IntelliJ IDEA pre-configured with the Sleec plugin.
+8. To launch IntelliJ IDEA in the Ubuntu environment, open the terminal and run:
+   ```bash
+   intellij-idea-community
+   ```
+9. If prompted for a password in the virtual machine, use:
+   ```
+   changeme
+   ```
+
+Your Sleec plugin is now ready to use within the virtual machine!
+
+---
+## Reproducing Results of Set-wise Well-Formedness Validation
+
+LEGOS-SLEEC supports several forms of **set-wise well-formedness analysis** for SLEEC rule sets. These analyses detect issues that may arise when considering multiple rules together, including **situational conflicts, restrictiveness, redundancy, and insufficiency**.
+
+To reproduce the results shown in the tutorial paper, follow the steps below.
+
+---
+
+### Step 1: Load the Case Study
+
+1. Open **IntelliJ IDEA** with the **SLEEC plugin** installed.
+2. Create a new SLEEC project using: File → New → Project → SLEEC Templates
+3. Copy the `LEGOS_SLEEC_ALMI.sleec` definitions and rules from [here](LEGOS_SLEEC_ALMI.sleec)
+4. Place the file inside the **Evaluation** or **Case Studies** folder of the project.
+
+This file contains the SLEEC rules used in the tutorial experiments.
+
+---
+
+### Step 2: Run Well-Formedness Analyses
+
+LEGOS-SLEEC provides several analysis buttons in the IntelliJ toolbar. Each button corresponds to a specific class of well-formedness checks.
+
+Below we describe how to reproduce each result reported in the tutorial.
+
+---
+
+### Situational Conflict Detection
+
+Situational conflicts arise when **two or more rules may require incompatible actions under the same situation**.
+
+1. Click the **Situational Conflict** analysis button in the toolbar as shown below: ![Situational Conflict Button](/img/situational-conflict.jpg)
+2. Select the file `LEGOS_SLEEC_ALMI.sleec`.
+3. The analyzer will detect rule combinations that may lead to conflicts.
+The diagnostic highlights the rules involved in the conflict and the conditions under which the conflict occurs.
+
+---
+
+### Restrictiveness Detection
+
+Restrictiveness occurs when **a rule unnecessarily constrains behaviour**, preventing legitimate system actions.
+
+To reproduce:
+1. Click the **Restrictiveness Analysis** button in the toolbar, as shown below: ![Restrictiveness Button](/img/restrictiveness.jpeg)
+2. Select the `LEGOS_SLEEC_ALMI.sleec` file.
+3. The tool analyzes whether some rules overly restrict the system behaviour.
+The diagnostic indicates the rules responsible for restricting behaviour and the corresponding conditions.
+
+---
+
+### Set-wise Redundancy Detection
+
+Set-wise redundancy arises when **a rule is fully implied by other rules in the set**, making it unnecessary.
+
+To reproduce:
+
+1. Click the **Redundancy Analysis** button in the toolbar, as shown below: ![Set-wise Redundancy Button](/img/set-wise-redundancy.jpg)
+2. Select `LEGOS_SLEEC_ALMI.sleec`.
+3. The tool computes whether any rule can be inferred from others.
+The diagnostic identifies redundant rules and the rule combinations that imply them.
+
+---
+
+### Insufficiency Detection
+
+Insufficiency occurs when **rules fail to specify required behaviour for certain situations**, leaving gaps in the specification.
+
+To reproduce:
+
+1. Click the **Insufficiency Analysis** button, as shown below: ![Insufficiency Button](/img/Insufficiency.jpeg)
+2. Select `LEGOS_SLEEC_ALMI.sleec`.
+3. The tool searches for scenarios where no rule applies.
+The diagnostic reports situations where the rule set is incomplete.
+
+
+
